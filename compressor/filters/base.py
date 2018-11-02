@@ -170,6 +170,8 @@ class CompilerFilter(FilterBase):
             ext = self.type and ".%s" % self.type or ""
             self.outfile = NamedTemporaryFile(mode='r+', suffix=ext)
             options["outfile"] = self.outfile.name
+            if system() == "Windows":
+                self.outfile.close()
 
         # Quote infile and outfile for spaces etc.
         if "infile" in options:
